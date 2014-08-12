@@ -74,11 +74,11 @@
     
     if(webviewResult == 1) {
         [super writeJavascript:[[CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                                  messageAsString:message]
+                                                  messageAsInt:webviewResult]
                                 toSuccessCallbackString:self.callbackID]];
     } else {
         [super writeJavascript:[[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-                                                  messageAsString:message]
+                                                  messageAsInt:webviewResult]
                                 toErrorCallbackString:self.callbackID]];
     }
 }
