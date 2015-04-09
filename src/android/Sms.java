@@ -26,8 +26,8 @@ public class Sms extends CordovaPlugin {
   private CallbackContext callbackContext;
 
   @Override
-  public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
-    this.callbackContext = callbackContext;
+  public boolean execute(String action, JSONArray args, final CallbackContext cContext) throws JSONException {
+    this.callbackContext = cContext;
 
     if (action.equals(ACTION_SEND_SMS)) {
       try {
