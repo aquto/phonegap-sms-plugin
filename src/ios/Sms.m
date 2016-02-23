@@ -1,13 +1,8 @@
 #import "Sms.h"
-#import <Cordova/NSArray+Comparisons.h>
 
 @implementation Sms
 @synthesize callbackID;
 
-- (CDVPlugin *)initWithWebView:(UIWebView *)theWebView {
-    self = (Sms *)[super initWithWebView:theWebView];
-    return self;
-}
 
 - (void)send:(CDVInvokedUrlCommand*)command {
     
@@ -73,13 +68,15 @@
     [self.viewController dismissViewControllerAnimated:YES completion:nil];
     
     if(webviewResult == 1) {
-        [super writeJavascript:[[CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                                  messageAsInt:webviewResult]
-                                toSuccessCallbackString:self.callbackID]];
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                                          messageAsString:message];
+        
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackID];
     } else {
-        [super writeJavascript:[[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-                                                  messageAsInt:webviewResult]
-                                toErrorCallbackString:self.callbackID]];
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                          messageAsString:message];
+        
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackID];
     }
 }
 
